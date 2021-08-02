@@ -1,0 +1,48 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Off Request</title>
+  <link rel=" stylesheet" href="styles.css">
+  <script src="time-off.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <label>Employee</label>
+    <select id="employee">
+      <option></option>
+      <option value="6102f3de1a4dd6228bbaf558">Iyris Vigil</option>
+      <option value="6102f3e81a4dd6228bbaf65b">Anthony Cardillo</option>
+      <option value="6102f3f41a4dd6228bbaf813">Lucas Palazzi</option>
+      <option value="6102f3fc1a4dd6228bbaf943">Adam Berg</option>
+      <option value="6102f4051a4dd6228bbafab6">Marco Yuen</option>
+      <option value="6102f40d1a4dd6228bbafbae">Shawn Pak</option>
+    </select>
+    <h1>Paid Time Off</h1>
+    <label>Available hours</label>
+    <p id="available-hours">40 hrs</p>
+    <label>Current balance</label>
+    <p id="current-balance">40 hrs</p>
+    <a href="/time-off-request">Request time off</a>
+    <h2>Past</h2>
+    <table id="past-table">
+      <thead>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Hours</th>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <h2>Policy Details</h2>
+    <label>Earning policy</label>
+    <p>80 hours earned throughout the year</p>
+    <label>Carryover limit</label>
+    <p>224 hours</p>
+  </div>
+</body>
+
+</html>

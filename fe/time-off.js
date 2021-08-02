@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const availableHours = document.getElementById("available-hours");
-  const currentBalance = document.getElementById("current-balance");
+  const vacationAvailableBalance = document.getElementById("vacation-available-balance");
+  const vacationCurrentBalance = document.getElementById("vacation-current-balance");
+
+  const sickAvailableBalance = document.getElementById("sick-available-balance");
+  const sickCurrentBalance = document.getElementById("sick-current-balance");
+
   const pastTable = document.getElementById("past-table");
   const pastTableBody = pastTable.getElementsByTagName("tbody")[0];
   const employeeSelect = document.getElementById("employee");
@@ -44,8 +48,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return res.json();
       })
       .then(function (data) {
-        availableHours.innerText = data.data.vacation.availableBalance.toFixed(1)
-        currentBalance.innerText = data.data.vacation.currentBalance.toFixed(1)
+        vacationAvailableBalance.innerText = data.data.vacation.availableBalance.toFixed(1)
+        vacationCurrentBalance.innerText = data.data.vacation.currentBalance.toFixed(1)
+
+        sickAvailableBalance.innerText = data.data.sick.availableBalance.toFixed(1)
+        sickCurrentBalance.innerText = data.data.sick.currentBalance.toFixed(1)
       })
   }
 });

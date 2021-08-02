@@ -51,17 +51,24 @@ async function main() {
       return res.sendStatus(404)
     }
 
-    const policy = {
+    const vacationPolicy = {
       accrualRate: 1.54,
       period: "week"
     };
 
-    const weeksEmployed = moment().diff(moment(employee.start), "week")
-    const hoursAccrued = weeksEmployed * policy.accrualRate;
-    let availableVacationBalance = hoursAccrued
-    let currentVacationBalance = hoursAccrued
-    let availableSickBalance = hoursAccrued
-    let currentSickBalance = hoursAccrued
+    const vacationPeriodsEmployed = moment().diff(moment(employee.start), vacationPolicy.period)
+    const vacationHoursAccrued = vacationPeriodsEmployed * vacationPolicy.accrualRate;
+    let availableVacationBalance = vacationHoursAccrued
+    let currentVacationBalance = vacationHoursAccrued
+
+    const sickPolicy = {
+      accrualRate: 10 * 8,
+      period: "year"
+    };
+    const sickPeriodEmployed = moment().diff(moment(employee.start), sickPolicy.period)
+    const sickHoursAccrued = sickPolicy.accrualRate + (sickPeriodEmployed * sickPolicy.accrualRate)
+    let availableSickBalance = sickHoursAccrued
+    let currentSickBalance = sickHoursAccrued
 
     const TimeOff = client.db().collection("timeoffs");
     const timeOffs = await TimeOff.find({

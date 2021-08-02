@@ -9,7 +9,7 @@ async function main() {
   await client.connect();
 
   const app = express();
-  const port = 3000;
+  const port = Number(process.env.PORT);
 
   app.use(express.urlencoded());
 

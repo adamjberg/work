@@ -29,7 +29,26 @@ async function main() {
     const Review = client.db().collection("reviews");
     Review.insertOne(value);
 
-    res.send("Thank you for submitting your review!")
+    res.send("Success!")
+  });
+
+  app.post("/api/timeoffs", (req, res, next) => {
+    const schema = Joi.object({
+      employee: Joi.string().required(),
+      type: Joi.string().valid("vacation", "sick"),
+      date: Joi.string().required(),
+      hours: Joi.number().integer().min(1).max(8)
+    });
+
+    const { error, value } = schema.validate(req.body);
+    if (error) {
+      return next(error)
+    }
+
+    const TimeOff = client.db().collection("timeoffs");
+    TimeOff.insertOne(value);
+
+    res.send("Success!")
   });
 
   app.listen(port, () => {

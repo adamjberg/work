@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Off Request</title>
+  <link rel=" stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <form action="http://localhost:3001/api/timeoffs" method="POST">
+    <h1>Time Off</h1>
+    <label>Employee</label>
+    <select name="employee">
+      <option></option>
+      <option value="6102f3de1a4dd6228bbaf558">Iyris Vigil</option>
+      <option value="6102f3e81a4dd6228bbaf65b">Anthony Cardillo</option>
+      <option value="6102f3f41a4dd6228bbaf813">Lucas Palazzi</option>
+      <option value="6102f3fc1a4dd6228bbaf943">Adam Berg</option>
+      <option value="6102f4051a4dd6228bbafab6">Marco Yuen</option>
+      <option value="6102f40d1a4dd6228bbafbae">Shawn Pak</option>
+    </select>
+    <select name="type">
+      <option value="vacation">Vacation</option>
+      <option value="sick">Sick</option>
+    </select>
+    <input name="date" type="date"/>
+    <input name="hours" type="number" min="1" max="8" value="8"/>
+    <input type="submit"/>
+  </form>
+  </div>
+</body>
+
+</html>

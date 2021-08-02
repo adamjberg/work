@@ -1,0 +1,51 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"">
+  <title>Work</title>
+  <link rel=" stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <form action="http://localhost:3000/api/reviews" method="POST">
+      <h1>Review</h1>
+      <label>Reviewer</label>
+      <select name="reviewer">
+        <option></option>
+        <option value="6102f3de1a4dd6228bbaf558">Iyris Vigil</option>
+        <option value="6102f3e81a4dd6228bbaf65b">Anthony Cardillo</option>
+        <option value="6102f3f41a4dd6228bbaf813">Lucas Palazzi</option>
+        <option value="6102f3fc1a4dd6228bbaf943">Adam Berg</option>
+        <option value="6102f4051a4dd6228bbafab6">Marco Yuen</option>
+        <option value="6102f40d1a4dd6228bbafbae">Shawn Pak</option>
+      </select>
+      <label>Reviewee</label>
+      <select name="reviewee">
+        <option></option>
+        <option value="6102f3de1a4dd6228bbaf558">Iyris Vigil</option>
+        <option value="6102f3e81a4dd6228bbaf65b">Anthony Cardillo</option>
+        <option value="6102f3f41a4dd6228bbaf813">Lucas Palazzi</option>
+        <option value="6102f3fc1a4dd6228bbaf943">Adam Berg</option>
+        <option value="6102f4051a4dd6228bbafab6">Marco Yuen</option>
+        <option value="6102f40d1a4dd6228bbafbae">Shawn Pak</option>
+      </select>
+      <label>Evaluation</label>
+      <textarea name="evaluation" rows="16"></textarea>
+      <label>Rating</label>
+      <select name="rating">
+        <option></option>
+        <option value="-2">Does Not Meet</option>
+        <option value="-1">Needs Improvement</option>
+        <option value="0">Meets Requirements</option>
+        <option value="1">Exceeds Expectations</option>
+        <option value="2">Significantly Exceeds Expectations</option>
+      </select>
+      <button>Submit</button>
+    </form>
+  </div>
+</body>
+
+</html>

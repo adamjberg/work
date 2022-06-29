@@ -29,10 +29,19 @@ classDiagram
       Review : +ID _id
       Review : +ID reviewer
       Review : +ID reviewee
-      Review : +Date evaluation
+      Review : +String evaluation
       Review : +int rating
+      
+    class PerformanceReview
+      PerformanceReview : +ID _id
+      PerformanceReview : +ID employee
+      PerformanceReview : +ID manager
+      PerformanceReview : +String selfEvaluation
+      PerformanceReview : +String evaluation
+      PerformanceReview : +int rating
 
     Company <-- Employee
     Employee <-- Review
+    Employee <-- PerformanceReview
     Employee <-- TimeOff
 ```

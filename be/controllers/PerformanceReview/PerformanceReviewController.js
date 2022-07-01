@@ -8,6 +8,10 @@ function initializePerformanceReviewController(app) {
   });
 
   router.post("/:id", async (req, res) => {
+    const { performanceReviewService } = req.services;
+
+    await performanceReviewService.updateById(req.params.id, { ...req.body });
+
     res.send(await getHtmlForPerformanceReview(req));
   });
 

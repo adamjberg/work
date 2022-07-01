@@ -12,6 +12,14 @@ class PerformanceReviewService {
       _id: mongodb.ObjectId(id)
     });
   }
+
+  updateById(id, update) {
+    return this.PerformanceReview.updateOne({
+      _id: mongodb.ObjectId(id)
+    }, {
+      $set: update
+    })
+  }
 }
 
 module.exports = PerformanceReviewService

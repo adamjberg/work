@@ -4,6 +4,10 @@ const Joi = require("joi");
 const mongodb = require("mongodb");
 const moment = require("moment");
 
+const EmployeeService = require("./services/EmployeeService");
+const PerformanceReviewService = require("./services/PerformanceReviewService");
+const { initializePerformanceReviewController } = require("./controllers/PerformanceReview/PerformanceReviewController");
+
 async function main() {
   dotenv.config();
   const client = new mongodb.MongoClient(process.env.DB_URI);
@@ -13,6 +17,16 @@ async function main() {
   const port = Number(process.env.PORT);
 
   app.use(express.urlencoded());
+
+  app.use((req, res, next) => {
+    req.services = {
+      employeeService: new EmployeeService(client),
+      performanceReviewService: new PerformanceReviewService(client)
+    }
+    next();
+  })
+
+  initializePerformanceReviewController(app);
 
   app.post("/api/reviews", (req, res, next) => {
     const schema = Joi.object({

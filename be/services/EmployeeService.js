@@ -12,6 +12,12 @@ class EmployeeService {
       _id: mongodb.ObjectId(id)
     });
   }
+
+  getByEmail(email) {
+    return this.Employee.findOne({
+      email
+    });
+  }
 }
 
 module.exports = EmployeeService

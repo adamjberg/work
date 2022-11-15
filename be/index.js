@@ -7,6 +7,7 @@ const moment = require("moment");
 const EmployeeService = require("./services/EmployeeService");
 const PerformanceReviewService = require("./services/PerformanceReviewService");
 const { initializePerformanceReviewController } = require("./controllers/PerformanceReview/PerformanceReviewController");
+const { initializeAuthController } = require("./controllers/AuthController");
 
 async function main() {
   dotenv.config();
@@ -26,6 +27,7 @@ async function main() {
     next();
   })
 
+  initializeAuthController(app);
   initializePerformanceReviewController(app);
 
   app.post("/api/reviews", (req, res, next) => {

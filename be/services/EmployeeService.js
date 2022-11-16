@@ -18,6 +18,10 @@ class EmployeeService {
       email
     });
   }
+
+  insertOne(employee) {
+    return this.Employee.insertOne(employee);
+  }
 }
 
 module.exports = EmployeeService

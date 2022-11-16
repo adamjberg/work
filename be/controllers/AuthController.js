@@ -1,17 +1,49 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
 
 function initializeAuthController(app) {
   const router = express.Router();
 
-  router.post("/login", async (req, res) => {
+  router.post("/login", async (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+
+      const employee = await req.services.employeeService.getByEmail(email);
+      if (employee && bcrypt.compareSync(password, employee.password)) {
+        req.session.user = String(employee._id);
+        res.redirect("/home.html");
+      } else {
+        res.sendStatus(400);
+      }
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.post("/signup", async (req, res) => {
     const { email, password } = req.body;
+    const hashedPassword = bcrypt.hashSync(password);
 
-    const employee = await req.services.employeeService.getByEmail(email);
-    // TODO: Check password and create session
+    res.json({
+      data: {
+        hashedPassword
+      }
+    })
 
-    req.session.user = "1";
+    // const employee = await req.services.employeeService.getByEmail(email);
+    // if (employee) {
+    //   return res.sendStatus(400);
+    // }
 
-    res.redirect("/home.html")
+    // TODO: Create UI for this kind of flow
+    // const { insertedId } = await req.services.employeeService.insertOne({
+    //   email,
+    //   password: hashedPassword,
+    // });
+
+    // req.session.user = String(insertedId);
+
+    // res.redirect("/home.html");
   });
 
   app.use("/api/auth", router);

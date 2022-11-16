@@ -3,6 +3,8 @@ const express = require("express");
 const Joi = require("joi");
 const mongodb = require("mongodb");
 const moment = require("moment");
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const EmployeeService = require("./services/EmployeeService");
 const PerformanceReviewService = require("./services/PerformanceReviewService");
@@ -17,6 +19,17 @@ async function main() {
 
   const app = express();
   const port = Number(process.env.PORT);
+
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false,
+      store: MongoStore.create({
+        client,
+      }),
+    }),
+  );
 
   app.use(express.urlencoded());
 

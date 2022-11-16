@@ -9,6 +9,8 @@ function initializeAuthController(app) {
     const employee = await req.services.employeeService.getByEmail(email);
     // TODO: Check password and create session
 
+    req.session.user = "1";
+
     res.redirect("/home.html")
   });
 

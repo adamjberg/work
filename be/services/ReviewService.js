@@ -8,16 +8,28 @@ class ReviewService {
   }
 
   getById(id) {
-    return Review.findOne({
-      _id: mongodb.ObjectId(req.params.id)
-    })
+    return this.Review.findOne({
+      _id: mongodb.ObjectId(id),
+    });
   }
 
   getForReviewer(id) {
     return this.Review.find({
-      reviewer: mongodb.ObjectId(id)
+      reviewer: mongodb.ObjectId(id),
     }).toArray();
+  }
+
+  updateById(id, update) {
+    return this.Review.updateOne(
+      { _id: mongodb.ObjectId(id) },
+      {
+        $set: {
+          evaluation: update.evaluation,
+          rating: update.rating,
+        },
+      }
+    );
   }
 }
 
-module.exports = ReviewService
+module.exports = ReviewService;

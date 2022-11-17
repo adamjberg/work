@@ -3,8 +3,13 @@ const express = require("express");
 function initializeReviewController(app) {
   const router = express.Router();
 
-  router.get("/api/reviews/:id", async (req, res, next) => {
-    const review = await req.services.reviewService.getById();
+  router.post("/:id", async (req, res, next) => {
+    await req.services.reviewService.updateById(req.params.id, req.body);
+    res.redirect("/reviews/list.html");
+  });
+
+  router.get("/:id", async (req, res, next) => {
+    const review = await req.services.reviewService.getById(req.params.id);
     res.json({
       data: review
     })

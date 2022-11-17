@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peer Review</title>
+  <style>
+    body {
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    label, input, select {
+      display: block;
+    }
+
+    input, textarea, select { 
+      width: 100%;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Peer Review</h1>
+  <h2 id="reviewee"></h2>
+  <label>Evaluation</label>
+  <textarea name="evaluation" rows="16"></textarea>
+  <label>Rating</label>
+  <select name="rating">
+    <option></option>
+    <option value="-2">Does Not Meet</option>
+    <option value="-1">Needs Improvement</option>
+    <option value="0">Meets Requirements</option>
+    <option value="1">Exceeds Expectations</option>
+    <option value="2">Significantly Exceeds Expectations</option>
+  </select>
+  <button>Submit</button>
+</body>
+<script>
+  async function init() {
+    const searchMatches = /review=(\w*)/.exec(location.search);
+    const reviewId = searchMatches[1];
+
+    const res = await fetch(`/api/reviews/${reviewId}`);
+    const { data: review } = await res.json();
+
+    const reviewee = document.getElementById("reviewee");
+    reviewee.innerText = review.reviewee;
+  }
+
+  init();
+</script>
+</html>

@@ -7,6 +7,10 @@ class EmployeeService {
     this.Employee = client.db().collection("employees");
   }
 
+  getAll() {
+    return this.Employee.find().toArray();
+  }
+
   getById(id) {
     return this.Employee.findOne({
       _id: mongodb.ObjectId(id)

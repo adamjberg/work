@@ -11,6 +11,8 @@ const PerformanceReviewService = require("./services/PerformanceReviewService");
 const { initializePerformanceReviewController } = require("./controllers/PerformanceReview/PerformanceReviewController");
 const { initializeAuthController } = require("./controllers/AuthController");
 const { initializeReviewController } = require("./controllers/ReviewController");
+const ReviewService = require("./services/ReviewService");
+const { initializeEmployeeController } = require("./controllers/EmployeeController");
 
 async function main() {
   dotenv.config();
@@ -36,7 +38,8 @@ async function main() {
   app.use((req, res, next) => {
     req.services = {
       employeeService: new EmployeeService(client),
-      performanceReviewService: new PerformanceReviewService(client)
+      performanceReviewService: new PerformanceReviewService(client),
+      reviewService: new ReviewService(client)
     }
     next();
   })
@@ -44,6 +47,7 @@ async function main() {
   initializeAuthController(app);
   initializePerformanceReviewController(app);
   initializeReviewController(app);
+  initializeEmployeeController(app);
 
   app.post("/api/reviews", (req, res, next) => {
     const schema = Joi.object({

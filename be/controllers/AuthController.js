@@ -10,7 +10,7 @@ function initializeAuthController(app) {
 
       const employee = await req.services.employeeService.getByEmail(email);
       if (employee && bcrypt.compareSync(password, employee.password)) {
-        req.session.user = String(employee._id);
+        req.session.employee = String(employee._id);
         res.redirect("/home.html");
       } else {
         res.sendStatus(400);

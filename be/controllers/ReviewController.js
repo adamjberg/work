@@ -3,21 +3,19 @@ const express = require("express");
 function initializeReviewController(app) {
   const router = express.Router();
 
-  router.get("", async (req, res) => {
+  router.get("/api/reviews/:id", async (req, res, next) => {
+    const review = await req.services.reviewService.getById();
     res.json({
-      data: [
-        {
-          _id: "1",
-          reviewee: {
-            _id: "1",
-            name: "Kieran"
-          },
-          reviewer: {
-            _id: "2",
-            name: "Adam"
-          }
-        }
-      ]
+      data: review
+    })
+  });
+
+  router.get("", async (req, res) => {
+    const employee = req.session.employee;
+    const data = await req.services.reviewService.getForReviewer(employee);
+
+    res.json({
+      data
     })
   });
 

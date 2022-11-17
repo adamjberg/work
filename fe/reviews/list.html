@@ -36,6 +36,13 @@
     const headerCol = document.createElement("td");
     headerCol.innerText = "Employee";
     headerRow.append(headerCol)
+
+    const createCol = document.createElement("td");
+    const createLink = createCol.appendChild(document.createElement("a"))
+    createLink.innerText = "Create"
+    createLink.href = "/reviews/peer.html"
+    headerRow.append(createCol)
+
     for (const review of json.data) {
       const row = document.createElement("tr");
       table.append(row)

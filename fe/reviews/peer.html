@@ -23,8 +23,9 @@
 </head>
 <body>
   <h1>Peer Review</h1>
-  <h2 id="reviewee"></h2>
   <form id="form" method="POST">
+    <label>Employee</label>
+    <select name="reviewee"></select>
     <label>Evaluation</label>
     <textarea name="evaluation" rows="16"></textarea>
     <label>Rating</label>
@@ -43,32 +44,41 @@
 <script>
   async function init() {
     const searchMatches = /review=(\w*)/.exec(location.search);
-    const reviewId = searchMatches[1];
+    const reviewId = searchMatches?.length > 1 ? searchMatches[1] : null;
 
     const form = document.getElementById("form");
-    form.action = `/api/reviews/${reviewId}`;
+    if (reviewId) {
+      form.action = `/api/reviews/${reviewId}`;
+    } else {
+      form.action = `/api/reviews`;
+    }
 
     const reviewInput = document.getElementById("review");
     reviewInput.value = reviewId;
 
-    const res = await fetch(`/api/reviews/${reviewId}`);
-    const { data: review } = await res.json();
+    let review = null
+    if (reviewId) {
+      const res = await fetch(`/api/reviews/${reviewId}`);
+      const { data } = await res.json();
+      review = data;
+    }
 
     const rating = document.getElementsByName("rating")[0]
-    rating.value = review.rating;
+    rating.value = review?.rating;
 
     const evaluation = document.getElementsByName("evaluation")[0]
-    evaluation.value = review.evaluation || "";
+    evaluation.value = review?.evaluation || "";
 
     const employeeRes = await fetch("/api/employees");
     const { data: employees } = await employeeRes.json();
-    const employeesById = {};
-    for (const employee of employees) {
-      employeesById[employee._id] = employee;
-    }
 
-    const reviewee = document.getElementById("reviewee");
-    reviewee.innerText = employeesById[review.reviewee].name;
+    const reviewee = document.getElementsByName("reviewee")[0];
+    for (const employee of employees) {
+      const option = document.createElement("option");
+      option.innerText = employee.name;
+      option.value = employee._id;
+      reviewee.appendChild(option);
+    }
   }
 
   init();

@@ -8,6 +8,14 @@ function initializeReviewController(app) {
     res.redirect("/reviews/list.html");
   });
 
+  router.post("", async (req, res, next) => {
+    await req.services.reviewService.insertOne({
+      ...req.body,
+      reviewer: req.session.employee
+    });
+    res.redirect("/reviews/list.html");
+  });
+
   router.get("/:id", async (req, res, next) => {
     const review = await req.services.reviewService.getById(req.params.id);
     res.json({

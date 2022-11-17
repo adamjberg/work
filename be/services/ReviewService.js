@@ -19,6 +19,15 @@ class ReviewService {
     }).toArray();
   }
 
+  insertOne(data) {
+    return this.Review.insertOne({
+      reviewee: mongodb.ObjectId(data.reviewee),
+      reviewer: mongodb.ObjectId(data.reviewer),
+      evaluation: data.evaluation,
+      rating: data.rating
+    });
+  }
+
   updateById(id, update) {
     return this.Review.updateOne(
       { _id: mongodb.ObjectId(id) },

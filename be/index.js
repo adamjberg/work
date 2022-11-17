@@ -49,6 +49,14 @@ async function main() {
   initializeReviewController(app);
   initializeEmployeeController(app);
 
+  app.get("/", (req, res) => {
+    if (req.session.employee) {
+      res.redirect("/home.html")
+    } else {
+      res.redirect("/login.html")
+    }
+  })
+
   app.post("/api/reviews", (req, res, next) => {
     const schema = Joi.object({
       reviewer: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),

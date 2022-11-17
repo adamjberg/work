@@ -32,11 +32,17 @@
     const table = document.createElement("table");
     root.append(table);
     const headerRow = document.createElement("tr");
+    headerRow.style.borderBottom = "1px solid black"
     table.append(headerRow)
-    const headerCol = document.createElement("td");
-    headerCol.innerText = "Employee";
-    headerRow.append(headerCol)
 
+    const employeeCol = document.createElement("td");
+    employeeCol.innerText = "Employee";
+    headerRow.append(employeeCol)
+
+    const createdCol = document.createElement("td");
+    createdCol.innerText = "Created";
+    headerRow.append(createdCol)
+    
     const createCol = document.createElement("td");
     const createLink = createCol.appendChild(document.createElement("a"))
     createLink.innerText = "Create"
@@ -46,15 +52,26 @@
     for (const review of json.data) {
       const row = document.createElement("tr");
       table.append(row)
+
       const col = document.createElement("td");
       col.innerText = employeesById[review.reviewee].name;
       row.append(col)
+
+      const createdCol = document.createElement("td");
+      createdCol.innerText = idToDate(review._id).toLocaleDateString();
+      row.append(createdCol)
 
       const col2 = document.createElement("td");
       col2.innerHTML = `<a href="/reviews/peer.html?review=${review._id}">View</a>`;
       row.append(col2)
     }
   }
+
+  function idToDate(id) {
+    const timestamp = parseInt(id.substr(0,8), 16)*1000
+    return new Date(timestamp)
+  }
+
   init();
 </script>
 </html>

@@ -16,7 +16,7 @@ class ReviewService {
   getForReviewer(id) {
     return this.Review.find({
       reviewer: mongodb.ObjectId(id),
-    }).toArray();
+    }).sort({ _id: -1 }).toArray();
   }
 
   insertOne(data) {

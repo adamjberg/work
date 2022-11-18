@@ -13,6 +13,8 @@ const { initializeAuthController } = require("./controllers/AuthController");
 const { initializeReviewController } = require("./controllers/ReviewController");
 const ReviewService = require("./services/ReviewService");
 const { initializeEmployeeController } = require("./controllers/EmployeeController");
+const { initializeReviewCycleController } = require("./controllers/ReviewCycleController");
+const ReviewCycleService = require("./services/ReviewCycleService");
 
 async function main() {
   dotenv.config();
@@ -39,7 +41,8 @@ async function main() {
     req.services = {
       employeeService: new EmployeeService(client),
       performanceReviewService: new PerformanceReviewService(client),
-      reviewService: new ReviewService(client)
+      reviewService: new ReviewService(client),
+      reviewCycleService: new ReviewCycleService(client)
     }
     next();
   })
@@ -48,6 +51,7 @@ async function main() {
   initializePerformanceReviewController(app);
   initializeReviewController(app);
   initializeEmployeeController(app);
+  initializeReviewCycleController(app);
 
   app.get("/", (req, res) => {
     if (req.session.employee) {

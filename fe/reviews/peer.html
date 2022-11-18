@@ -3,7 +3,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Peer Review</title>
+  <title>Review</title>
   <style>
     body {
       max-width: 800px;
@@ -22,8 +22,10 @@
   </style>
 </head>
 <body>
-  <h1>Peer Review</h1>
+  <h1>Review</h1>
   <form id="form" method="POST">
+    <label>Cycle</label>
+    <select name="cycle"></select>
     <label>Employee</label>
     <select name="reviewee"></select>
     <label>Evaluation</label>
@@ -51,6 +53,18 @@
       form.action = `/api/reviews/${reviewId}`;
     } else {
       form.action = `/api/reviews`;
+    }
+
+    {
+      const res = await fetch(`/api/review-cycles`);
+      const { data } = await res.json();
+      const cycleSelect = document.getElementsByName("cycle")[0];
+      for (const cycle of data) {
+        const option = document.createElement("option");
+        option.value = cycle._id;
+        option.innerText = cycle.name;
+        cycleSelect.appendChild(option);
+      }
     }
 
     const reviewInput = document.getElementById("review");

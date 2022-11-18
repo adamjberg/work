@@ -28,6 +28,10 @@
     <select name="cycle" required>
       <option></option>
     </select>
+    <label>Type</label>
+    <select name="type" required>
+      <option value="peer">Peer</option>
+    </select>
     <label>Employee</label>
     <select name="reviewee"></select>
     <label>Evaluation</label>
@@ -70,6 +74,21 @@
       }
     }
 
+
+
+    {
+      const res = await fetch(`/api/employees/me`);
+      const { data } = await res.json();
+
+      if (data.manager) {
+        const typeSelect = document.getElementsByName("type")[0];
+        const performanceOption = document.createElement("option");
+        performanceOption.value = "performance";
+        performanceOption.innerText = "Performance"
+        typeSelect.appendChild(performanceOption)
+      }
+    }
+
     const reviewInput = document.getElementById("review");
     reviewInput.value = reviewId;
 
@@ -78,7 +97,6 @@
       const res = await fetch(`/api/reviews/${reviewId}`);
       const { data } = await res.json();
 
-      console.log(data.cycle)
       cycleSelect.value = data.cycle;
 
       review = data;

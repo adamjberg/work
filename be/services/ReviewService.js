@@ -25,7 +25,8 @@ class ReviewService {
       reviewer: mongodb.ObjectId(data.reviewer),
       cycle: mongodb.ObjectId(data.cycle),
       evaluation: data.evaluation,
-      rating: data.rating
+      rating: data.rating,
+      type: data.type
     });
   }
 

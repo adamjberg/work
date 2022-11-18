@@ -11,6 +11,14 @@ function initializeEmployeeController(app) {
     })
   });
 
+  router.get("/me", async (req, res) => {
+    const data = await req.services.employeeService.getById(req.session.employee);
+
+    res.json({
+      data
+    })
+  });
+
   app.use("/api/employees", router);
 }
 

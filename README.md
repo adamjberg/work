@@ -17,6 +17,7 @@ classDiagram
       Employee : +String name
       Employee : +Date start
       Employee : +Date end
+      Employee : +boolean manager
 
     class TimeOff
       TimeOff : +ID _id
@@ -31,6 +32,7 @@ classDiagram
       Review : +ID reviewee
       Review : +String evaluation
       Review : +int rating
+      Review : +String type
     
     class ReviewCycle
       ReviewCycle : +ID _id

@@ -25,7 +25,7 @@ function initializeReviewController(app) {
 
   router.get("", async (req, res) => {
     const employee = req.session.employee;
-    const data = await req.services.reviewService.getForReviewer(employee);
+    const data = await req.services.reviewService.getForEmployee(employee);
 
     res.json({
       data

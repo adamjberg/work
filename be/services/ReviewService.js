@@ -13,9 +13,16 @@ class ReviewService {
     });
   }
 
-  getForReviewer(id) {
+  getForEmployee(id) {
     return this.Review.find({
-      reviewer: mongodb.ObjectId(id),
+      $or: [
+        {
+          reviewee: mongodb.ObjectId(id),
+        },
+        {
+          reviewer: mongodb.ObjectId(id),
+        }
+      ]
     }).sort({ _id: -1 }).toArray();
   }
 

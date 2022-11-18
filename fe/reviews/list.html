@@ -35,9 +35,17 @@
     headerRow.style.borderBottom = "1px solid black"
     table.append(headerRow)
 
-    const employeeCol = document.createElement("td");
-    employeeCol.innerText = "Employee";
-    headerRow.append(employeeCol)
+    const revieweeCol = document.createElement("td");
+      revieweeCol.innerText = "Reviewee";
+      headerRow.append(revieweeCol);
+
+      const reviewerCol = document.createElement("td");
+      reviewerCol.innerText = "Reviewer";
+      headerRow.append(reviewerCol)
+
+      const typeCol = document.createElement("td");
+      typeCol.innerText = "Type";
+      headerRow.append(typeCol)
 
     const createdCol = document.createElement("td");
     createdCol.innerText = "Created";
@@ -53,9 +61,17 @@
       const row = document.createElement("tr");
       table.append(row)
 
-      const col = document.createElement("td");
-      col.innerText = employeesById[review.reviewee].name;
-      row.append(col)
+      const revieweeCol = document.createElement("td");
+      revieweeCol.innerText = employeesById[review.reviewee].name;
+      row.append(revieweeCol)
+
+      const reviewerCol = document.createElement("td");
+      reviewerCol.innerText = employeesById[review.reviewer].name;
+      row.append(reviewerCol)
+
+      const typeCol = document.createElement("td");
+      typeCol.innerText = review.type;
+      row.append(typeCol)
 
       const createdCol = document.createElement("td");
       createdCol.innerText = idToDate(review._id).toLocaleDateString();
@@ -64,53 +80,6 @@
       const col2 = document.createElement("td");
       col2.innerHTML = `<a href="/reviews/peer.html?review=${review._id}">View</a>`;
       row.append(col2)
-    }
-
-    // ------ PERFORMANCE REVIEWS ------
-    {
-      const res = await fetch("/api/performance-reviews");
-      const json = await res.json();
-
-      const txtPerformanceReviews = document.createElement("h1");
-      txtPerformanceReviews.innerText = "Performance Reviews";
-      root.append(txtPerformanceReviews);
-
-      const table = document.createElement("table");
-      root.append(table);
-      const headerRow = document.createElement("tr");
-      headerRow.style.borderBottom = "1px solid black"
-      table.append(headerRow)
-
-      const employeeCol = document.createElement("td");
-      employeeCol.innerText = "Employee";
-      headerRow.append(employeeCol)
-
-      const createdCol = document.createElement("td");
-      createdCol.innerText = "Created";
-      headerRow.append(createdCol)
-
-      const createCol = document.createElement("td");
-      const createLink = createCol.appendChild(document.createElement("a"))
-      createLink.innerText = "Create"
-      createLink.href = "/reviews/performance.html"
-      headerRow.append(createCol)
-
-      for (const review of json.data) {
-        const row = document.createElement("tr");
-        table.append(row)
-
-        const col = document.createElement("td");
-        col.innerText = employeesById[review.reviewee].name;
-        row.append(col)
-
-        const createdCol = document.createElement("td");
-        createdCol.innerText = idToDate(review._id).toLocaleDateString();
-        row.append(createdCol)
-
-        const col2 = document.createElement("td");
-        col2.innerHTML = `<a href="/reviews/performance.html?id=${review._id}">View</a>`;
-        row.append(col2)
-      }
     }
   }
 

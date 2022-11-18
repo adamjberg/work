@@ -25,7 +25,9 @@
   <h1>Review</h1>
   <form id="form" method="POST">
     <label>Cycle</label>
-    <select name="cycle"></select>
+    <select name="cycle" required>
+      <option></option>
+    </select>
     <label>Employee</label>
     <select name="reviewee"></select>
     <label>Evaluation</label>
@@ -55,10 +57,11 @@
       form.action = `/api/reviews`;
     }
 
+    const cycleSelect = document.getElementsByName("cycle")[0];
+    
     {
       const res = await fetch(`/api/review-cycles`);
       const { data } = await res.json();
-      const cycleSelect = document.getElementsByName("cycle")[0];
       for (const cycle of data) {
         const option = document.createElement("option");
         option.value = cycle._id;
@@ -74,6 +77,10 @@
     if (reviewId) {
       const res = await fetch(`/api/reviews/${reviewId}`);
       const { data } = await res.json();
+
+      console.log(data.cycle)
+      cycleSelect.value = data.cycle;
+
       review = data;
     }
 

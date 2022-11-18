@@ -23,6 +23,7 @@ class ReviewService {
     return this.Review.insertOne({
       reviewee: mongodb.ObjectId(data.reviewee),
       reviewer: mongodb.ObjectId(data.reviewer),
+      cycle: mongodb.ObjectId(data.cycle),
       evaluation: data.evaluation,
       rating: data.rating
     });
@@ -33,6 +34,7 @@ class ReviewService {
       { _id: mongodb.ObjectId(id) },
       {
         $set: {
+          cycle: mongodb.ObjectId(update.cycle),
           evaluation: update.evaluation,
           rating: update.rating,
         },

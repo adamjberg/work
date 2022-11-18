@@ -7,6 +7,12 @@ class PerformanceReviewService {
     this.PerformanceReview = client.db().collection("performance-reviews");
   }
 
+  getForEmployee(id) {
+    return this.PerformanceReview.find({
+      reviewee: mongodb.ObjectId(id)
+    }).toArray();
+  }
+
   getById(id) {
     return this.PerformanceReview.findOne({
       _id: mongodb.ObjectId(id)

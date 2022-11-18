@@ -3,6 +3,14 @@ const express = require("express");
 function initializePerformanceReviewController(app) {
   const router = express.Router();
 
+  router.get("", async (req, res) => {
+    const { performanceReviewService } = req.services;
+    const data = await performanceReviewService.getForEmployee(req.session.employee);
+    res.json({
+      data
+    })
+  });
+
   router.get("/:id", async (req, res) => {
     res.send(await getHtmlForPerformanceReview(req));
   });

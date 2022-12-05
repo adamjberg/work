@@ -16,10 +16,11 @@ class ReviewService {
   getForEmployee(id) {
     return this.Review.find({
       $or: [
-        {
-          reviewee: mongodb.ObjectId(id),
-          privacy: { $ne: "private" }
-        },
+        // TODO: Re-enable once UI has been improved and able to prevent reviewee from editting
+        // {
+        //   reviewee: mongodb.ObjectId(id),
+        //   privacy: { $ne: "private" }
+        // },
         {
           reviewer: mongodb.ObjectId(id),
         }

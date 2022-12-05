@@ -18,6 +18,7 @@ class ReviewService {
       $or: [
         {
           reviewee: mongodb.ObjectId(id),
+          privacy: { $ne: "private" }
         },
         {
           reviewer: mongodb.ObjectId(id),

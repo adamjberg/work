@@ -33,11 +33,13 @@
       <option value="peer">Peer</option>
     </select>
     <label>Employee</label>
-    <select name="reviewee"></select>
+    <select name="reviewee" required>
+      <option></option>
+    </select>
     <label>Evaluation</label>
-    <textarea name="evaluation" rows="16"></textarea>
+    <textarea name="evaluation" rows="16" required></textarea>
     <label>Rating</label>
-    <select name="rating">
+    <select name="rating" required>
       <option></option>
       <option value="-2">Does Not Meet</option>
       <option value="-1">Needs Improvement</option>
